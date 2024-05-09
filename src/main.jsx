@@ -7,11 +7,17 @@ import './trivia.css'
 import LoginPage from "./pages/LoginPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import RegistrationPage from "./pages/RegistrationPage.jsx";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <LoginPage />,
+        // errorElement: <NotFoundPage />
+    },
+    {
+        path: '/register',
+        element: <RegistrationPage />,
         // errorElement: <NotFoundPage />
     },
     {

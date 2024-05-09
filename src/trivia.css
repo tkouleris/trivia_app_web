@@ -1,0 +1,18 @@
+/*dark: "#030637",*/
+/*hard_dark: "#3C0753",*/
+/*light_dark: "#720455",*/
+/*light: "#910A67",*/
+
+html, body{
+    background-color: #030637;
+}
+
+.dark-background{
+    background-color: #030637;
+    color: #910A67;
+}
+
+.light-background{
+    background: #910A67;
+    color: #910A67;
+}
