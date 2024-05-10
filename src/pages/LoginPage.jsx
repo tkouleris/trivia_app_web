@@ -7,12 +7,20 @@ import {login} from '../utils/http.jsx'
 
 import {styles} from "../constants/styles.jsx";
 import {colors} from "../constants/colors.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function LoginPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    useEffect(() => {
+        const username = window.localStorage.getItem('username')
+        const token = window.localStorage.getItem('token')
+        if(token !== null && username !== null){
+            navigate("/dashboard");
+        }
+    }, []);
 
 
     function goToRegistration() {
@@ -21,7 +29,15 @@ export default function LoginPage() {
 
     function handleLogin(){
         login({email: email, password: password}).then( (response) =>{
-            console.log(response)
+            if(response.status === 1){
+                console.log(response.data)
+                window.localStorage.setItem('username', response.data.username);
+                window.localStorage.setItem('token', response.data.token);
+                navigate("/dashboard");
+                return;
+            }
+
+            alert('error')
         })
     }
 
