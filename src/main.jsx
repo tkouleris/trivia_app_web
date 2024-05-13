@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RegistrationPage from "./pages/RegistrationPage.jsx";
+import GameBoardPage from "./pages/GameBoardPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -26,8 +27,8 @@ const router = createBrowserRouter([
         // errorElement: <NotFoundPage />
     },
     {
-        path: '/gameboard',
-        element: <DashboardPage />,
+        path: '/gameboard/:category',
+        element: <GameBoardPage />,
         // errorElement: <NotFoundPage />
     },
     // {
