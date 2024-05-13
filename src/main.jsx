@@ -25,6 +25,11 @@ const router = createBrowserRouter([
         element: <DashboardPage />,
         // errorElement: <NotFoundPage />
     },
+    {
+        path: '/gameboard',
+        element: <DashboardPage />,
+        // errorElement: <NotFoundPage />
+    },
     // {
     //     path: '/profiles',
     //     element: <ProfilesPage />,

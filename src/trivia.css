@@ -12,3 +12,12 @@ html, body{
     background: #910A67;
     color: #910A67;
 }
+.navigation_bar{
+    margin-top: 55px;
+}
+.left-navigation{
+    text-align: left;
+}
+.right-navigation{
+    text-align: right;
+}
