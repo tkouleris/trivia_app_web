@@ -26,5 +26,24 @@ export const styles = {
         color: colors.light_dark,
         borderColor: colors.light_dark,
         backgroundColor: colors.dark
+    },
+    question_text:{
+        textAlign: 'center',
+        color: colors.light,
+        fontWeight: 'bold',
+        fontSize: 22
+    },
+    answers_container:{
+        marginTop: 20
+    },
+    answer_button:{
+        width: '100%',
+        marginTop: 20,
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: colors.light,
+        borderWidth: 5,
+        borderColor: colors.hard_dark,
+        backgroundColor: colors.dark
     }
 }
