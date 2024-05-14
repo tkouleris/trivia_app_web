@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         // errorElement: <NotFoundPage />
     },
     {
-        path: '/gameboard/:category',
+        path: '/gameboard',
         element: <GameBoardPage />,
         // errorElement: <NotFoundPage />
     },

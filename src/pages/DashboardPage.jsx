@@ -25,10 +25,10 @@ export default function DashboardPage() {
     })
 
     function categorySelectionHandler(category){
-        // fetchQuestions(window.localStorage.token, category).then((response)=>{
-        //
-        // })
-        navigate("/gameboard/" + category);
+        fetchQuestions(window.localStorage.token, category).then((response)=>{
+            navigate("/gameboard", {state: {questions: response.data}});
+        })
+
     }
 
     function logout(){
