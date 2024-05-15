@@ -55,7 +55,7 @@ export default function DashboardPage() {
                 <Button variant="primary" style={styles.categoryButton} onClick={()=>categorySelectionHandler('film')}>
                     <Film color={colors.light}/> Film
                 </Button>
-                <Button variant="primary" style={styles.categoryButton} onClick={()=>categorySelectionHandler('book')}>
+                <Button variant="primary" style={styles.categoryButton} onClick={()=>categorySelectionHandler('books')}>
                     <Book color={colors.light}/> Book
                 </Button>
                 <Button variant="primary" style={styles.categoryButton} onClick={()=>categorySelectionHandler('celebrities')}>
