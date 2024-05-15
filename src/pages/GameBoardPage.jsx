@@ -1,10 +1,11 @@
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import Button from "react-bootstrap/Button";
 import {styles} from "../constants/styles.jsx";
 
 
 export default function GameBoardPage(){
+    const navigate = useNavigate();
     const {state} = useLocation();
     const {questions} = state;
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -30,7 +31,7 @@ export default function GameBoardPage(){
         setTotalPoints(roundStats)
         if(currentIndex === questions.length-1){
             console.log(roundStats)
-            alert('finished')
+            navigate("/results", {state: {stats: roundStats}});
         }
     }
 

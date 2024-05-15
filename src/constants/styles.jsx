@@ -45,5 +45,19 @@ export const styles = {
         borderWidth: 5,
         borderColor: colors.hard_dark,
         backgroundColor: colors.dark
-    }
+    },
+    stats_text:{
+        color: colors.light,
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    confirm_button_container:{
+        marginTop: 20
+    },
+    confirmResultsButton: {
+        backgroundColor: "#910A67",
+        borderColor: "#910A67",
+        width: '100%',
+        marginLeft: 5
+    },
 }

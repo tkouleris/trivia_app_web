@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {login_info, stats_info, register_info, trivia_info} from '../../config.jsx'
+import {login_info, stats_info, register_info, trivia_info, confirm_results} from '../../config.jsx'
 
 export async function login(credentials){
     const response = await axios.post(
@@ -46,5 +46,15 @@ export async function fetchQuestions(token, category){
         }
     }
     const response = await axios.get(trivia_info.url + '?category='+category,headers).catch((error)=>console.log(error))
+    return {'data': response.data}
+}
+
+export async function confirmResult(token, result){
+    let headers = {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }
+    const response = await axios.post(confirm_results.url, result, headers).catch((error)=>console.log(error))
     return {'data': response.data}
 }

@@ -1,14 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-// import App from './App.jsx'
-// import './index.css'
 import './trivia.css'
 import LoginPage from "./pages/LoginPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RegistrationPage from "./pages/RegistrationPage.jsx";
 import GameBoardPage from "./pages/GameBoardPage.jsx";
+import RoundResultPage from "./pages/RoundResultPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -31,16 +30,11 @@ const router = createBrowserRouter([
         element: <GameBoardPage />,
         // errorElement: <NotFoundPage />
     },
-    // {
-    //     path: '/profiles',
-    //     element: <ProfilesPage />,
-    //     children:[
-    //         {
-    //             path: '/profiles/:profileId',
-    //             element: <ProfilePage />
-    //         }
-    //     ]
-    // }
+    {
+        path: '/results',
+        element: <RoundResultPage />,
+        // errorElement: <NotFoundPage />
+    },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

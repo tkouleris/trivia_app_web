@@ -21,3 +21,8 @@ html, body{
 .right-navigation{
     text-align: right;
 }
+.stats_container{
+    border:10px solid #3C0753;
+    border-radius: 30px;
+    padding: 20px 10px;
+}
