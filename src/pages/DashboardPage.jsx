@@ -34,7 +34,7 @@ export default function DashboardPage() {
     function logout(){
         window.localStorage.removeItem('token')
         window.localStorage.removeItem('username')
-        navigate('/')
+        navigate('/login')
     }
 
     return <div className={'row dark-background'}>
