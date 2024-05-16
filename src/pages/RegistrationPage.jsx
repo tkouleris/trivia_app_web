@@ -5,8 +5,12 @@ import Button from "react-bootstrap/Button";
 import {styles} from "../constants/styles.jsx";
 import {useState} from "react";
 import {validateEmail, validatePassword} from "../utils/validators.jsx";
+import {registerUser} from "../utils/http.jsx"
+import {useNavigate} from "react-router-dom";
 
 export default function RegistrationPage() {
+    const navigate = useNavigate();
+
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -26,6 +30,17 @@ export default function RegistrationPage() {
             alert('Username cannot be empty');
             return;
         }
+
+        registerUser(username, email, password).then( (response) => {
+            if(response.status === 0){
+                alert(response.message)
+            }
+
+            if(response.status === 1){
+                alert('Registration Completed');
+                navigate("/");
+            }
+        })
 
     }
 
