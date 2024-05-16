@@ -3,8 +3,32 @@ import {colors} from "../constants/colors.jsx";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {styles} from "../constants/styles.jsx";
+import {useState} from "react";
+import {validateEmail, validatePassword} from "../utils/validators.jsx";
 
 export default function RegistrationPage() {
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    function handleRegistration(){
+        if(!validateEmail(email)){
+            alert('Email address is not valid');
+            return;
+        }
+
+        if(!validatePassword(password)){
+            alert('Password must be at least 6 characters, having one number and one special character');
+            return;
+        }
+
+        if(username.length === 0){
+            alert('Username cannot be empty');
+            return;
+        }
+
+    }
+
     return <div className={'row dark-background'}>
         <div className={"col-xl-4 col-4"}></div>
         <div className={"col-xl-4 col-4"}>
@@ -18,19 +42,19 @@ export default function RegistrationPage() {
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label><b>Email address</b></Form.Label>
-                    <Form.Control type="text" placeholder="Enter username"/>
+                    <Form.Control type="text" onChange={(e)=>setUsername(e.target.value)} value={username} placeholder="Enter username"/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label><b>Email address</b></Form.Label>
-                    <Form.Control type="email" placeholder="Enter email"/>
+                    <Form.Control type="email" onChange={(e)=>setEmail(e.target.value)} value={email} placeholder="Enter email"/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label><b>Password</b></Form.Label>
-                    <Form.Control type="password" placeholder="Password"/>
+                    <Form.Control type="password" onChange={(e)=>setPassword(e.target.value)} placeholder="Password"/>
                 </Form.Group>
                 <div style={{textAlign: "center"}}>
-                    <Button variant="primary" style={styles.registerButton}>
+                    <Button variant="primary" style={styles.registerButton} onClick={handleRegistration}>
                         Register
                     </Button>
                 </div>
