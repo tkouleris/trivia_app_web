@@ -30,7 +30,6 @@ export default function GameBoardPage(){
         }
         setTotalPoints(roundStats)
         if(currentIndex === questions.length-1){
-            console.log(roundStats)
             navigate("/results", {state: {stats: roundStats}});
         }
     }

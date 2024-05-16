@@ -30,7 +30,6 @@ export default function LoginPage() {
     function handleLogin(){
         login({email: email, password: password}).then( (response) =>{
             if(response.status === 1){
-                console.log(response.data)
                 window.localStorage.setItem('username', response.data.username);
                 window.localStorage.setItem('token', response.data.token);
                 navigate("/dashboard");
