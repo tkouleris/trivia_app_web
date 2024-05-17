@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
-import {getStats, fetchQuestions} from "../utils/http.jsx";
+import {getStats, fetchQuestions, refreshToken} from "../utils/http.jsx";
 import { Film, Book, People, Compass } from 'react-ionicons'
 import Button from "react-bootstrap/Button";
 import {styles} from "../constants/styles.jsx";
 import {colors} from "../constants/colors.jsx";
 import {useNavigate} from "react-router-dom";
+import {logout} from "../utils/helpers.jsx";
 
 
 export default function DashboardPage() {
@@ -25,17 +26,23 @@ export default function DashboardPage() {
     })
 
     function categorySelectionHandler(category){
-        fetchQuestions(window.localStorage.token, category).then((response)=>{
-            navigate("/gameboard", {state: {questions: response.data}});
-        })
-
+        refreshToken(window.localStorage.token).then((response) =>{
+            if(response!== undefined && response.data.status == 1){
+                window.localStorage.setItem('token',response.data.token);
+                fetchQuestions(window.localStorage.token, category).then((response)=>{
+                    navigate("/gameboard", {state: {questions: response.data}});
+                })
+            }else{
+                logout(navigate)
+            }
+        });
     }
 
-    function logout(){
-        window.localStorage.removeItem('token')
-        window.localStorage.removeItem('username')
-        navigate('/login')
-    }
+    // function logout_handler(){
+    //     window.localStorage.removeItem('token')
+    //     window.localStorage.removeItem('username')
+    //     navigate('/login')
+    // }
 
     return <div className={'row dark-background'}>
         <div className={"col-xl-4 col-4"}></div>
@@ -43,7 +50,7 @@ export default function DashboardPage() {
             <div className='row navigation_bar'>
                 <div className="col-xl-6 left-navigation"><b>User:</b> {window.localStorage.getItem('username')}</div>
                 <div className="col-xl-6 right-navigation">
-                    <Button style={styles.logOutButton} onClick={logout}>
+                    <Button style={styles.logOutButton} onClick={() => logout(navigate)}>
                         Logout
                     </Button>
                 </div>

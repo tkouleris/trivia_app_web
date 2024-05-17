@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {login_info, stats_info, register_info, trivia_info, confirm_results} from '../../config.jsx'
+import {login_info, stats_info, register_info, trivia_info, confirm_results, refresh_token} from '../../config.jsx'
 
 export async function login(credentials){
     const response = await axios.post(
@@ -57,4 +57,14 @@ export async function confirmResult(token, result){
     }
     const response = await axios.post(confirm_results.url, result, headers).catch((error)=>console.log(error))
     return {'data': response.data}
+}
+
+export async function refreshToken(token){
+    let headers = {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }
+    const response_token = axios.post(refresh_token.url,{},headers).catch((error)=>console.log(error))
+    return response_token;
 }
