@@ -1,8 +1,6 @@
-# React + Vite
+# Trivia Web App ( using with the [trivia api](https://github.com/tkouleris/trivia_api))
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- npm run build
+Use the files that are created in the dist folder to run the app in a web server
+Guide(https://www.digitalocean.com/community/tutorials/deploy-react-application-with-nginx-on-ubuntu)
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
