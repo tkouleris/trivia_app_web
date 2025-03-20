@@ -18,45 +18,25 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <DashboardPage />,
-                // errorElement: <NotFoundPage />
             },
             {
                 path: '/gameboard',
                 element: <GameBoardPage />,
-                // errorElement: <NotFoundPage />
             },
             {
                 path: '/results',
                 element: <RoundResultPage />,
-                // errorElement: <NotFoundPage />
             },
         ],
     },
     {
         path: '/login',
         element: <LoginPage />,
-        // errorElement: <NotFoundPage />
     },
     {
         path: '/register',
         element: <RegistrationPage />,
-        // errorElement: <NotFoundPage />
     },
-    // {
-    //     path: '/dashboard',
-    //     element: <DashboardPage />,
-    //     // errorElement: <NotFoundPage />
-    // },
-    // {
-    //     path: '/gameboard',
-    //     element: <GameBoardPage />,
-    //     // errorElement: <NotFoundPage />
-    // },
-    // {
-    //     path: '/results',
-    //     element: <RoundResultPage />,
-    //     // errorElement: <NotFoundPage />
-    // },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
