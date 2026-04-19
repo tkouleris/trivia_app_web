@@ -1,7 +1,9 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
-import Button from "react-bootstrap/Button";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { ArrowBack } from 'react-ionicons'
 import {styles} from "../constants/styles.jsx";
+import {colors} from "../constants/colors.jsx";
 
 
 export default function GameBoardPage(){
@@ -9,48 +11,82 @@ export default function GameBoardPage(){
     const {state} = useLocation();
     const {questions} = state;
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [roundStats, setTotalPoints] = useState({
+    const [roundStats, setRoundStats] = useState({
         "points": 0,
-        "total_questions": 10,
+        "total_questions": questions.length,
         "wrong_answers":0,
         "correct_answers": 0,
         "difficulty": "mix"
     })
 
     function handleAnswer(points){
-        if(points > 0 && currentIndex <= (questions.length-1)){
-            roundStats.points = roundStats.points + points
-            roundStats.correct_answers = roundStats.correct_answers + 1
-        }
-        if(points === 0 && currentIndex <= (questions.length-1)){
-            roundStats.wrong_answers = roundStats.wrong_answers + 1
-        }
-        if(currentIndex < (questions.length-1)){
-            setCurrentIndex(currentIndex + 1)
-        }
-        setTotalPoints(roundStats)
-        if(currentIndex === questions.length-1){
-            navigate("/results", {state: {stats: roundStats}});
+        const isCorrect = points > 0;
+        
+        const updatedStats = {
+            ...roundStats,
+            points: roundStats.points + points,
+            correct_answers: roundStats.correct_answers + (isCorrect ? 1 : 0),
+            wrong_answers: roundStats.wrong_answers + (isCorrect ? 0 : 1)
+        };
+
+        setRoundStats(updatedStats);
+
+        if(currentIndex < (questions.length - 1)){
+            setCurrentIndex(currentIndex + 1);
+        } else {
+            navigate("/results", {state: {stats: updatedStats}});
         }
     }
 
-    return <div className={'row dark-background'}>
-        <div className={"col-xl-4 col-4"}></div>
-        <div className={"col-xl-4 col-4"}>
-            <div style={styles.question_text}>{(currentIndex + 1)}. {decodeURIComponent(questions[currentIndex].question)}</div>
-            <div style={styles.answers_container}>
-            {
-                questions[currentIndex].answers.map((answer, index) =>
-                    <Button key={index}
-                            variant="primary"
-                            style={styles.answer_button}
-                            onClick={() => handleAnswer(answer.points)}>{decodeURIComponent(answer.answer)}
-                    </Button>
-                )
-            }
-            </div>
-        </div>
-        <div className={"col-xl-4 col-4"}></div>
+    const progress = ((currentIndex + 1) / questions.length) * 100;
 
+    return <div className={'dark-background'}>
+        <Container className="py-4">
+            <div className='row navigation_bar'>
+                <div className="col-6 left-navigation">
+                    <Button 
+                        variant="link" 
+                        className="p-0 d-flex align-items-center text-decoration-none"
+                        style={{color: colors.light}}
+                        onClick={() => navigate('/dashboard')}
+                    >
+                        <ArrowBack color={colors.light} style={{marginRight: '5px'}}/>
+                        Quit Game
+                    </Button>
+                </div>
+                <div className="col-6 right-navigation">
+                    <span className="score-badge">Score: {roundStats.points}</span>
+                </div>
+            </div>
+
+            <div className="progress-wrapper">
+                <div className="progress-bar-fill" style={{width: `${progress}%`}}></div>
+            </div>
+
+            <Row className="justify-content-center">
+                <Col lg={8}>
+                    <div className="game-card">
+                        <span className="question-number">Question {currentIndex + 1} of {questions.length}</span>
+                        <div className="question-text">
+                            {decodeURIComponent(questions[currentIndex].question)}
+                        </div>
+                        
+                        <div className="answer-grid">
+                            {
+                                questions[currentIndex].answers.map((answer, index) =>
+                                    <div 
+                                        key={index}
+                                        className="answer-option"
+                                        onClick={() => handleAnswer(answer.points)}
+                                    >
+                                        {decodeURIComponent(answer.answer)}
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     </div>
 }

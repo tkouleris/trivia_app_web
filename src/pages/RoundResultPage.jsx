@@ -1,8 +1,7 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import {Trophy} from "react-ionicons";
+import {Trophy, CheckmarkCircle, CloseCircle, StatsChart} from "react-ionicons";
 import {colors} from "../constants/colors.jsx";
-import {styles} from "../constants/styles.jsx";
-import Button from "react-bootstrap/Button";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import {confirmResult, refreshToken} from "../utils/http.jsx";
 import {logout} from "../utils/helpers.jsx";
 
@@ -25,25 +24,54 @@ export default function RoundResultPage() {
         });
     }
 
-    return <div className={'row dark-background'}>
-        <div className={"col-xl-4 col-4"}></div>
-        <div className={"col-xl-4 col-4"}>
-            <div style={{textAlign: "center"}}>
-                <Trophy
-                    color={colors.light}
-                    height="250px"
-                    width="250px"
-                />
-            </div>
-            <div className="stats_container">
-                <div style={styles.stats_text}>Points: { stats.points }</div>
-                <div style={styles.stats_text}>Success: { (stats.correct_answers / stats.total_questions) * 100} %</div>
-                <div style={styles.stats_text}>Wrong Answers: { stats.wrong_answers }</div>
-            </div>
-            <div style={styles.confirm_button_container}>
-                <Button style={styles.confirmResultsButton} onClick={confirmHandler}>Confirm Result</Button>
-            </div>
-        </div>
-        <div className={"col-xl-4 col-4"}></div>
+    const successRate = Math.round((stats.correct_answers / stats.total_questions) * 100);
+
+    return <div className={'dark-background'}>
+        <Container className="py-5">
+            <Row className="justify-content-center">
+                <Col md={8} lg={6}>
+                    <div className="result-card">
+                        <Trophy
+                            color={colors.light}
+                            height="120px"
+                            width="120px"
+                        />
+                        <h2 className="result-title">Quiz Completed!</h2>
+                        
+                        <div className="result-stats">
+                            <div className="result-stat-item">
+                                <StatsChart color={colors.light} />
+                                <span className="result-stat-value">{stats.points}</span>
+                                <span className="result-stat-label">Points</span>
+                            </div>
+                            <div className="result-stat-item">
+                                <CheckmarkCircle color="#28a745" />
+                                <span className="result-stat-value">{stats.correct_answers}</span>
+                                <span className="result-stat-label">Correct</span>
+                            </div>
+                            <div className="result-stat-item">
+                                <CloseCircle color="#dc3545" />
+                                <span className="result-stat-value">{stats.wrong_answers}</span>
+                                <span className="result-stat-label">Wrong</span>
+                            </div>
+                        </div>
+
+                        <div className="mb-4">
+                            <div className="result-stat-label">Success Rate</div>
+                            <div className="progress-wrapper mt-2" style={{marginBottom: '0'}}>
+                                <div className="progress-bar-fill" style={{width: `${successRate}%`}}></div>
+                            </div>
+                            <div className="text-end mt-1" style={{color: colors.light, fontWeight: 'bold'}}>
+                                {successRate}%
+                            </div>
+                        </div>
+
+                        <Button className="confirm-btn" onClick={confirmHandler}>
+                            Back to Dashboard
+                        </Button>
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     </div>
 }

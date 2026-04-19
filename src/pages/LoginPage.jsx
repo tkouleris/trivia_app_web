@@ -41,39 +41,51 @@ export default function LoginPage() {
     }
 
     return (
-        <div className={'row dark-background'}>
-            <div className={"col-xl-4 col-4"}></div>
-            <div className={"col-xl-4 col-4"}>
-                <div style={{textAlign: "center"}}>
+        <div className="login-container">
+            <div className="login-card">
+                <div className="login-icon-wrapper">
                     <HelpCircleOutline
                         color={colors.light}
-                        height="250px"
-                        width="250px"
+                        height="100px"
+                        width="100px"
                     />
                 </div>
-                <Form>
+                
+                <h1 className="login-title">kouleris trivia game</h1>
+                <p className="login-subtitle">Test your knowledge!</p>
+
+                <Form className="login-form">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label><b>Email address</b></Form.Label>
-                        <Form.Control type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter email"/>
+                        <Form.Label>Email Address</Form.Label>
+                        <Form.Control 
+                            type="email" 
+                            value={email} 
+                            onChange={(e)=>setEmail(e.target.value)} 
+                            placeholder="Enter your email"
+                        />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label><b>Password</b></Form.Label>
-                        <Form.Control type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password"/>
+                    <Form.Group className="mb-4" controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control 
+                            type="password" 
+                            value={password} 
+                            onChange={(e)=>setPassword(e.target.value)} 
+                            placeholder="Enter your password"
+                        />
                     </Form.Group>
-                    <div style={{textAlign: "center"}}>
-                        <Button variant="primary" style={styles.loginButton} onClick={handleLogin}>
+
+                    <div className="login-actions">
+                        <Button className="login-btn-primary" onClick={handleLogin}>
                             Login
                         </Button>
-                        <Button variant="primary" style={styles.registerButton}  onClick={goToRegistration} >
+                        <Button className="login-btn-secondary" onClick={goToRegistration}>
                             Register
                         </Button>
                     </div>
                 </Form>
             </div>
-            <div className={"col-xl-4 col-4"}></div>
         </div>
-
     );
 }
 

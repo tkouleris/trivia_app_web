@@ -44,37 +44,60 @@ export default function RegistrationPage() {
 
     }
 
-    return <div className={'row dark-background'}>
-        <div className={"col-xl-4 col-4"}></div>
-        <div className={"col-xl-4 col-4"}>
-            <div style={{textAlign: "center"}}>
-                <People
-                    color={colors.light}
-                    height="250px"
-                    width="250px"
-                />
-            </div>
-            <Form>
-                <Form.Group className="mb-3" controlId="formBasicUsername">
-                    <Form.Label><b>Email address</b></Form.Label>
-                    <Form.Control type="text" onChange={(e)=>setUsername(e.target.value)} value={username} placeholder="Enter username"/>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label><b>Email address</b></Form.Label>
-                    <Form.Control type="email" onChange={(e)=>setEmail(e.target.value)} value={email} placeholder="Enter email"/>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label><b>Password</b></Form.Label>
-                    <Form.Control type="password" onChange={(e)=>setPassword(e.target.value)} placeholder="Password"/>
-                </Form.Group>
-                <div style={{textAlign: "center"}}>
-                    <Button variant="primary" style={styles.registerButton} onClick={handleRegistration}>
-                        Register
-                    </Button>
+    return (
+        <div className="login-container">
+            <div className="login-card">
+                <div className="login-icon-wrapper">
+                    <People
+                        color={colors.light}
+                        height="100px"
+                        width="100px"
+                    />
                 </div>
-            </Form>
+                
+                <h1 className="login-title">Join Us</h1>
+                <p className="login-subtitle">Create your account to start playing</p>
+
+                <Form className="login-form">
+                    <Form.Group className="mb-3" controlId="formBasicUsername">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            onChange={(e)=>setUsername(e.target.value)} 
+                            value={username} 
+                            placeholder="Choose a username"
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Email Address</Form.Label>
+                        <Form.Control 
+                            type="email" 
+                            onChange={(e)=>setEmail(e.target.value)} 
+                            value={email} 
+                            placeholder="Enter your email"
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-4" controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control 
+                            type="password" 
+                            onChange={(e)=>setPassword(e.target.value)} 
+                            placeholder="Enter your password"
+                        />
+                    </Form.Group>
+
+                    <div className="login-actions">
+                        <Button className="login-btn-primary" onClick={handleRegistration}>
+                            Register
+                        </Button>
+                        <Button className="login-btn-secondary" onClick={() => navigate("/")}>
+                            Back to Login
+                        </Button>
+                    </div>
+                </Form>
+            </div>
         </div>
-        <div className={"col-xl-4 col-4"}></div>
-    </div>
+    );
 }

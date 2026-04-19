@@ -1,7 +1,10 @@
 import {useEffect, useState} from "react";
 import {getStats, fetchQuestions, refreshToken} from "../utils/http.jsx";
-import { Film, Book, People, Compass } from 'react-ionicons'
+import { Film, Book, People, Compass, Trophy, CheckmarkCircle, HelpCircle, StatsChart } from 'react-ionicons'
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import {styles} from "../constants/styles.jsx";
 import {colors} from "../constants/colors.jsx";
 import {useNavigate} from "react-router-dom";
@@ -38,50 +41,82 @@ export default function DashboardPage() {
         });
     }
 
-    // function logout_handler(){
-    //     window.localStorage.removeItem('token')
-    //     window.localStorage.removeItem('username')
-    //     navigate('/login')
-    // }
+    const successRate = (Math.round((stats["totals"]['correct_answers'] / (stats["totals"]['questions']===0?1:stats["totals"]['questions']) ) * 100) * 100) / 100;
 
-    return <div className={'row dark-background'}>
-        <div className={"col-xl-4 col-4"}></div>
-        <div className={"col-xl-4 col-4"}>
+    return <div className={'dark-background'}>
+        <Container className="py-4">
             <div className='row navigation_bar'>
-                <div className="col-xl-6 left-navigation"><b>User:</b> {window.localStorage.getItem('username')}</div>
-                <div className="col-xl-6 right-navigation">
+                <div className="col-6 left-navigation">
+                    <b>Welcome,</b>&nbsp;{window.localStorage.getItem('username')}
+                </div>
+                <div className="col-6 right-navigation">
                     <Button style={styles.logOutButton} onClick={() => logout(navigate)}>
                         Logout
                     </Button>
                 </div>
             </div>
-            <hr/>
-            <h3>Categories</h3>
-            <hr/>
-            <div>
-                <Button variant="primary" style={styles.categoryButton} onClick={()=>categorySelectionHandler('film')}>
-                    <Film color={colors.light}/> Film
-                </Button>
-                <Button variant="primary" style={styles.categoryButton} onClick={()=>categorySelectionHandler('books')}>
-                    <Book color={colors.light}/> Book
-                </Button>
-                <Button variant="primary" style={styles.categoryButton} onClick={()=>categorySelectionHandler('celebrities')}>
-                    <People color={colors.light}/> Celebrities
-                </Button>
-                <Button variant="primary" style={styles.categoryButton} onClick={()=>categorySelectionHandler('politics')}>
-                    <Compass color={colors.light}/> Politics
-                </Button>
-            </div>
-            <div>
-                <h3>Stats</h3>
-                <hr/>
-                <div><b>Points:</b> {stats["totals"]['points']} </div>
-                <div><b>Correct:</b> {stats["totals"]['correct_answers']}</div>
-                <div><b>Total Questions:</b> {stats["totals"]['questions']}</div>
-                <div><b>Success:</b> {(Math.round((stats["totals"]['correct_answers'] / (stats["totals"]['questions']===0?1:stats["totals"]['questions']) ) * 100) * 100) / 100}%</div>
-            </div>
-        </div>
 
-        <div className={"col-xl-4 col-4"}></div>
+            <Row className="mt-4">
+                <Col>
+                    <h3 className="section-title"><StatsChart color={colors.light} style={{verticalAlign: 'middle', marginRight: '10px'}}/>Your Performance</h3>
+                    <div className="stats_container">
+                        <Row>
+                            <Col xs={6} md={3} className="stat-item">
+                                <Trophy color={colors.light} className="mb-2"/>
+                                <span className="stat-value">{stats["totals"]['points']}</span>
+                                <span className="stat-label">Points</span>
+                            </Col>
+                            <Col xs={6} md={3} className="stat-item">
+                                <CheckmarkCircle color={colors.light} className="mb-2"/>
+                                <span className="stat-value">{stats["totals"]['correct_answers']}</span>
+                                <span className="stat-label">Correct</span>
+                            </Col>
+                            <Col xs={6} md={3} className="stat-item">
+                                <HelpCircle color={colors.light} className="mb-2"/>
+                                <span className="stat-value">{stats["totals"]['questions']}</span>
+                                <span className="stat-label">Questions</span>
+                            </Col>
+                            <Col xs={6} md={3} className="stat-item">
+                                <StatsChart color={colors.light} className="mb-2"/>
+                                <span className="stat-value">{successRate}%</span>
+                                <span className="stat-label">Success</span>
+                            </Col>
+                        </Row>
+                    </div>
+                </Col>
+            </Row>
+
+            <Row className="mt-4">
+                <Col>
+                    <h3 className="section-title">Select Category</h3>
+                    <Row className="gy-4">
+                        <Col xs={12} sm={6} md={3}>
+                            <div className="category-card" onClick={()=>categorySelectionHandler('film')}>
+                                <Film color="#fff" height="50px" width="50px" className="category-icon"/>
+                                <div className="category-name">Film</div>
+                            </div>
+                        </Col>
+                        <Col xs={12} sm={6} md={3}>
+                            <div className="category-card" onClick={()=>categorySelectionHandler('books')}>
+                                <Book color="#fff" height="50px" width="50px" className="category-icon"/>
+                                <div className="category-name">Book</div>
+                            </div>
+                        </Col>
+                        <Col xs={12} sm={6} md={3}>
+                            <div className="category-card" onClick={()=>categorySelectionHandler('celebrities')}>
+                                <People color="#fff" height="50px" width="50px" className="category-icon"/>
+                                <div className="category-name">Celebrities</div>
+                            </div>
+                        </Col>
+                        <Col xs={12} sm={6} md={3}>
+                            <div className="category-card" onClick={()=>categorySelectionHandler('politics')}>
+                                <Compass color="#fff" height="50px" width="50px" className="category-icon"/>
+                                <div className="category-name">Politics</div>
+                            </div>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+        </Container>
     </div>
 }

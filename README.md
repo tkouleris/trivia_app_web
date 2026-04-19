@@ -1,4 +1,4 @@
-# Trivia Web App
+# kouleris trivia game
 
 A modern, responsive trivia game built with React and Vite. This application allows users to register, log in, and challenge themselves with various trivia questions fetched from a backend API.
 
