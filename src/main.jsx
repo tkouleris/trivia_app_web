@@ -9,8 +9,13 @@ import RegistrationPage from "./pages/RegistrationPage.jsx";
 import GameBoardPage from "./pages/GameBoardPage.jsx";
 import RoundResultPage from "./pages/RoundResultPage.jsx";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
 
 const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <LandingPage />,
+    },
     {
         path: "/",
         element: <PrivateRoutes />,

@@ -92,8 +92,13 @@ export default function RegistrationPage() {
                         <Button className="login-btn-primary" onClick={handleRegistration}>
                             Register
                         </Button>
-                        <Button className="login-btn-secondary" onClick={() => navigate("/")}>
+                        <Button className="login-btn-secondary" onClick={() => navigate("/login")}>
                             Back to Login
+                        </Button>
+                    </div>
+                    <div className="text-center mt-3">
+                        <Button variant="link" onClick={() => navigate("/")} style={{color: colors.light, textDecoration: 'none'}}>
+                            Back to Home
                         </Button>
                     </div>
                 </Form>

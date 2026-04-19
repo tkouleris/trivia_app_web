@@ -36,7 +36,7 @@ export default function LoginPage() {
                 return;
             }
 
-            alert('error')
+            alert(response.message || 'Error during login')
         })
     }
 
@@ -81,6 +81,11 @@ export default function LoginPage() {
                         </Button>
                         <Button className="login-btn-secondary" onClick={goToRegistration}>
                             Register
+                        </Button>
+                    </div>
+                    <div className="text-center mt-3">
+                        <Button variant="link" onClick={() => navigate("/")} style={{color: colors.light, textDecoration: 'none'}}>
+                            Back to Home
                         </Button>
                     </div>
                 </Form>
