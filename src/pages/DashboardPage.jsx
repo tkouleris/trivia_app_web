@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {getStats, fetchQuestions, refreshToken} from "../utils/http.jsx";
-import { Film, Book, People, Compass, Trophy, CheckmarkCircle, HelpCircle, StatsChart } from 'react-ionicons'
+import { Film, Book, People, Compass, Trophy, CheckmarkCircle, HelpCircle, StatsChart, LogOut } from 'react-ionicons'
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -49,9 +49,19 @@ export default function DashboardPage() {
                 <div className="col-6 left-navigation">
                     <b>Welcome,</b>&nbsp;{window.localStorage.getItem('username')}
                 </div>
-                <div className="col-6 right-navigation">
-                    <Button style={styles.logOutButton} onClick={() => logout(navigate)}>
-                        Logout
+                <div className="col-6 right-navigation text-end">
+                    <Button 
+                        variant="link" 
+                        className="p-0 border-0" 
+                        style={{ color: colors.light }} 
+                        onClick={() => logout(navigate)}
+                        title="Logout"
+                    >
+                        <LogOut 
+                            color={colors.light} 
+                            height="30px" 
+                            width="30px"
+                        />
                     </Button>
                 </div>
             </div>

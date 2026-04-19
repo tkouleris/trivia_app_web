@@ -72,21 +72,21 @@ export default function LandingPage() {
                         <div className="category-card h-100 p-4" style={{ cursor: 'default' }}>
                             <Flash color={colors.light} height="40px" width="40px" className="mb-3" />
                             <h4>Fast-Paced</h4>
-                            <p className="mb-0 text-muted">Quick rounds designed to test your reflexes and recall speed under pressure.</p>
+                            <p className="mb-0" style={{ color: 'rgba(255,255,255,0.8)' }}>Quick rounds designed to test your reflexes and recall speed under pressure.</p>
                         </div>
                     </Col>
                     <Col md={4}>
                         <div className="category-card h-100 p-4" style={{ cursor: 'default' }}>
                             <StatsChart color={colors.light} height="40px" width="40px" className="mb-3" />
                             <h4>Track Progress</h4>
-                            <p className="mb-0 text-muted">Detailed statistics help you monitor your performance and improve over time.</p>
+                            <p className="mb-0" style={{ color: 'rgba(255,255,255,0.8)' }}>Detailed statistics help you monitor your performance and improve over time.</p>
                         </div>
                     </Col>
                     <Col md={4}>
                         <div className="category-card h-100 p-4" style={{ cursor: 'default' }}>
                             <Trophy color={colors.light} height="40px" width="40px" className="mb-3" />
                             <h4>Competitve</h4>
-                            <p className="mb-0 text-muted">Earn points for every correct answer and prove you're the ultimate trivia master.</p>
+                            <p className="mb-0" style={{ color: 'rgba(255,255,255,0.8)' }}>Earn points for every correct answer and prove you're the ultimate trivia master.</p>
                         </div>
                     </Col>
                 </Row>
