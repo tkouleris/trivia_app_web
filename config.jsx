@@ -5,3 +5,5 @@ export const trivia_info = { url: 'https://trivia.tkouleris.eu/trivia', method: 
 export const confirm_results = { url: 'https://trivia.tkouleris.eu/submit', method: 'post'};
 export const refresh_token = { url: 'https://trivia.tkouleris.eu/refresh', method: 'post'};
 export const verify = { url: 'https://trivia.tkouleris.eu/verify', method: 'get'};
+export const request_reset_password_info = { url: 'https://trivia.tkouleris.eu/request-reset-password', method: 'post'};
+export const reset_password_info = { url: 'https://trivia.tkouleris.eu/reset-password', method: 'post'};

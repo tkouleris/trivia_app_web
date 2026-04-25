@@ -6,7 +6,9 @@ import {
     trivia_info,
     confirm_results,
     refresh_token,
-    verify
+    verify,
+    request_reset_password_info,
+    reset_password_info
 } from '../../config.jsx'
 
 export async function login(credentials){
@@ -111,4 +113,30 @@ export async function verify_token(token){
         return {'status':0}
     }
     return {'status':1}
+}
+
+export async function requestResetPassword(email){
+    const response = await axios.post(
+        request_reset_password_info.url,
+        {
+            email: email
+        }
+    ).catch((e) => {
+        return {'data':{ 'message':e.response.data.message, 'status': e.response.data.status}};
+    });
+    return response.data
+}
+
+export async function resetPassword(email, token, password){
+    const response = await axios.post(
+        reset_password_info.url,
+        {
+            email: email,
+            token: token,
+            password: password
+        }
+    ).catch((e) => {
+        return {'data':{ 'message':e.response.data.message, 'status': e.response.data.status}};
+    });
+    return response.data
 }

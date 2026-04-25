@@ -10,6 +10,8 @@ import GameBoardPage from "./pages/GameBoardPage.jsx";
 import RoundResultPage from "./pages/RoundResultPage.jsx";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
+import ResetPasswordPage from "./pages/ResetPasswordPage.jsx";
+import ConfirmResetPasswordPage from "./pages/ConfirmResetPasswordPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
     {
         path: '/register',
         element: <RegistrationPage />,
+    },
+    {
+        path: '/reset-password-page',
+        element: <ResetPasswordPage />,
+    },
+    {
+        path: '/confirm-reset-password',
+        element: <ConfirmResetPasswordPage />,
     },
 ])
 
