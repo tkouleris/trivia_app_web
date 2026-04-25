@@ -1,9 +1,10 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { ArrowBack } from 'react-ionicons'
-import {styles} from "../constants/styles.jsx";
 import {colors} from "../constants/colors.jsx";
+import {logout} from "../utils/helpers.jsx";
+import {verify_token} from "../utils/http.jsx";
 
 
 export default function GameBoardPage(){
@@ -18,6 +19,16 @@ export default function GameBoardPage(){
         "correct_answers": 0,
         "difficulty": "mix"
     })
+
+    useEffect(() => {
+        verify_token(window.localStorage.getItem('token')).then((resp) => {
+            if(resp.status === 1){
+                console.log('ok!')
+            } else {
+                logout(navigate)
+            }
+        })
+    }, []);
 
     function handleAnswer(points){
         const isCorrect = points > 0;

@@ -1,5 +1,13 @@
 import axios from 'axios'
-import {login_info, stats_info, register_info, trivia_info, confirm_results, refresh_token} from '../../config.jsx'
+import {
+    login_info,
+    stats_info,
+    register_info,
+    trivia_info,
+    confirm_results,
+    refresh_token,
+    verify
+} from '../../config.jsx'
 
 export async function login(credentials){
     const response = await axios.post(
@@ -20,8 +28,14 @@ export async function getStats(token){
             'Authorization': 'Bearer ' + token
         }
     }
-    const response = await axios.get(stats_info.url, headers).catch((error)=>console.log(error))
-    return {'data': response.data}
+    const response = await axios.get(stats_info.url, headers).catch((error)=>{
+        console.log(error);
+        return { status: 401 };
+    })
+    if(response.status !== 200){
+        return {'status':0}
+    }
+    return {'status':1, 'data': response.data}
 }
 
 export async function registerUser(username, email, password){
@@ -45,8 +59,14 @@ export async function fetchQuestions(token, category){
             'Authorization': 'Bearer ' + token
         }
     }
-    const response = await axios.get(trivia_info.url + '?category='+category,headers).catch((error)=>console.log(error))
-    return {'data': response.data}
+    const response = await axios.get(trivia_info.url + '?category='+category,headers).catch((error)=>{
+        console.log(error);
+        return { status: 401 };
+    })
+    if(response.status !== 200){
+        return {'status':0}
+    }
+    return {'status':1, 'data': response.data}
 }
 
 export async function confirmResult(token, result){
@@ -55,8 +75,14 @@ export async function confirmResult(token, result){
             'Authorization': 'Bearer ' + token
         }
     }
-    const response = await axios.post(confirm_results.url, result, headers).catch((error)=>console.log(error))
-    return {'data': response.data}
+    const response = await axios.post(confirm_results.url, result, headers).catch((error)=>{
+        console.log(error);
+        return { status: 401 };
+    })
+    if(response.status !== 200){
+        return {'status':0}
+    }
+    return {'status':1, 'data': response.data}
 }
 
 export async function refreshToken(token){
@@ -65,6 +91,24 @@ export async function refreshToken(token){
             'Authorization': 'Bearer ' + token
         }
     }
-    const response_token = axios.post(refresh_token.url,{},headers).catch((error)=>console.log(error))
+    const response_token = axios.post(refresh_token.url,{},headers).catch((error)=>{
+        console.log(error);
+        return { status: 401 };
+    })
     return response_token;
+}
+
+export async function verify_token(token){
+    let headers = {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }
+    const response = await axios.get(verify.url, headers).catch((error)=>{
+        console.log(error);
+        return { status: 401 };
+    })
+    if(response.status !== 200){
+        return {'status':0}
+    }
 }

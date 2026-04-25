@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {styles} from "../constants/styles.jsx";
 import {colors} from "../constants/colors.jsx";
 import {useNavigate} from "react-router-dom";
 import {logout} from "../utils/helpers.jsx";
@@ -15,7 +14,11 @@ export default function DashboardPage() {
     const navigate = useNavigate();
     useEffect(() => {
         getStats(window.localStorage.getItem('token')).then((resp) => {
-            setStats(resp.data.data)
+            if(resp.status === 1){
+                setStats(resp.data.data)
+            } else {
+                logout(navigate)
+            }
         })
     }, []);
 
@@ -33,7 +36,11 @@ export default function DashboardPage() {
             if(response!== undefined && response.data.status == 1){
                 window.localStorage.setItem('token',response.data.token);
                 fetchQuestions(window.localStorage.token, category).then((response)=>{
-                    navigate("/gameboard", {state: {questions: response.data}});
+                    if(response.status === 1){
+                        navigate("/gameboard", {state: {questions: response.data}});
+                    } else {
+                        logout(navigate);
+                    }
                 })
             }else{
                 logout(navigate)

@@ -4,3 +4,4 @@ export const register_info = { url: 'https://trivia.tkouleris.eu/signup', method
 export const trivia_info = { url: 'https://trivia.tkouleris.eu/trivia', method: 'get'};
 export const confirm_results = { url: 'https://trivia.tkouleris.eu/submit', method: 'post'};
 export const refresh_token = { url: 'https://trivia.tkouleris.eu/refresh', method: 'post'};
+export const verify = { url: 'https://trivia.tkouleris.eu/verify', method: 'get'};
