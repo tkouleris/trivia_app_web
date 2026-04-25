@@ -104,11 +104,11 @@ export async function verify_token(token){
             'Authorization': 'Bearer ' + token
         }
     }
-    const response = await axios.get(verify.url, headers).catch((error)=>{
-        console.log(error);
-        return { status: 401 };
+    const response = await axios.get(verify.url, headers).catch(()=>{
+        return {'status':0}
     })
     if(response.status !== 200){
         return {'status':0}
     }
+    return {'status':1}
 }
