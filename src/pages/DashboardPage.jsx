@@ -14,6 +14,7 @@ export default function DashboardPage() {
     const navigate = useNavigate();
     useEffect(() => {
         getStats(window.localStorage.getItem('token')).then((resp) => {
+            console.log(resp)
             if(resp.status === 1){
                 setStats(resp.data.data)
             } else {

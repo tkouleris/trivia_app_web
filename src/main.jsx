@@ -13,6 +13,9 @@ import LandingPage from "./pages/LandingPage.jsx";
 import ResetPasswordPage from "./pages/ResetPasswordPage.jsx";
 import ConfirmResetPasswordPage from "./pages/ConfirmResetPasswordPage.jsx";
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GOOGLE_CLIENT_ID } from '../config.jsx';
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -56,6 +59,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+        <RouterProvider router={router} />
+      </GoogleOAuthProvider>
   </React.StrictMode>,
 )

@@ -8,7 +8,8 @@ import {
     refresh_token,
     verify,
     request_reset_password_info,
-    reset_password_info
+    reset_password_info,
+    google_login_info
 } from '../../config.jsx'
 
 export async function login(credentials){
@@ -127,6 +128,24 @@ export async function requestResetPassword(email){
     return response.data
 }
 
+export async function googleLogin(credential){
+    console.log(credential);
+    const response = await axios.post(
+        google_login_info.url,
+        {
+            id_token: credential
+        }
+    ).catch((e) => {
+        return {'data':{ 'message':e.response.data.message, 'status': e.response.data.status}};
+    });
+
+    if(response.status !== 200){
+        return {'status':0, 'message': response.data.message || "Error during Google login"}
+    }
+
+    return {'status':1, 'data': response.data}
+}
+
 export async function resetPassword(email, token, password){
     const response = await axios.post(
         reset_password_info.url,
@@ -135,8 +154,11 @@ export async function resetPassword(email, token, password){
             token: token,
             password: password
         }
-    ).catch((e) => {
-        return {'data':{ 'message':e.response.data.message, 'status': e.response.data.status}};
-    });
-    return response.data
+    ).catch((e) => e.toJSON());
+
+    if(response.status !== 200) {
+        return {'status': 0, 'message': "Password reset failed. Please try again."}
+    }
+
+    return {'status':1, 'data': response.data}
 }

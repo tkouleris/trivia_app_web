@@ -2,8 +2,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
 import { HelpCircleOutline } from 'react-ionicons'
+import { GoogleLogin } from '@react-oauth/google';
 
-import {login} from '../utils/http.jsx'
+import {login, googleLogin} from '../utils/http.jsx'
 
 import {colors} from "../constants/colors.jsx";
 import {useEffect, useState} from "react";
@@ -37,6 +38,23 @@ export default function LoginPage() {
 
             alert(response.message || 'Error during login')
         })
+    }
+
+    function handleGoogleSuccess(credentialResponse) {
+        googleLogin(credentialResponse.credential).then((response) => {
+            if (response.status === 1) {
+                console.log(response.data);
+                window.localStorage.setItem('username', response.data.username);
+                window.localStorage.setItem('token', response.data.token);
+                navigate("/dashboard");
+                return;
+            }
+            alert(response.message || 'Error during Google login')
+        })
+    }
+
+    function handleGoogleError() {
+        alert('Google Login Failed');
     }
 
     return (
@@ -82,6 +100,17 @@ export default function LoginPage() {
                             Register
                         </Button>
                     </div>
+
+                    <div className="google-login-wrapper mt-3 d-flex justify-content-center">
+                        <GoogleLogin
+                            onSuccess={handleGoogleSuccess}
+                            onError={handleGoogleError}
+                            theme="filled_blue"
+                            shape="rectangular"
+                            width="100%"
+                        />
+                    </div>
+
                     <div className="text-center mt-3">
                         <Button variant="link" onClick={() => navigate("/reset-password-page")} style={{color: colors.light, textDecoration: 'none'}}>
                             Forgot Password?
